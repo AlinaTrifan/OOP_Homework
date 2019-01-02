@@ -18,30 +18,30 @@ namespace OOP_Homeworks
             Product product = new Product("Alabala", "Albalact", 10.15, 2018, 10, 29, ProductCategorie.Bread);
 
             //BankAccount OOP
-            //BankAccount bankAccount = new BankAccount("Alina Trifan", 100);
-            //Console.WriteLine($"Account {bankAccount.Number} was created for {bankAccount.Owner} with the sum {bankAccount.Balance}");
-            //try
-            //{
-            //    bankAccount.Withdrawals(-1, DateTime.Now);
-            //    Console.WriteLine($"After the widtdrawal the bank account {bankAccount.Number} has {bankAccount.Balance} ");
-            //}
-            //catch (ArgumentException e)
-            //{
-            //    Console.WriteLine(e.Message);
-            //}
-            //catch (InvalidOperationException ex)
-            //{
-            //    Console.WriteLine(ex.Message);
-            //}
-            //try
-            //{ 
-                BankAccount bankAccount1 = new BankAccount("Alin Trifan", 100);
-            //}
-            catch (ArgumentException e1)
+            try
             {
-                Console.WriteLine("Exception caught creating account with negative balance");
-                Console.WriteLine(e1.Message);
+                BankAccount bankAccount = new BankAccount("Alina Trifan", 20);
+                Console.WriteLine($"Account {bankAccount.Number} was created for {bankAccount.Owner} with the sum {bankAccount.Balance}");
+                bankAccount.MakeWithdrawal(10, DateTime.Now);
+                Console.WriteLine($"After the withdrawal the bank account {bankAccount.Number} has {bankAccount.Balance} ");
+                bankAccount.MakeDeposit(100, DateTime.Now);
+                Console.WriteLine($"After the deposit the bank account {bankAccount.Number} has {bankAccount.Balance} ");
+                bankAccount.MakeDeposit(100, DateTime.Now);
+                Console.WriteLine($"After the deposit the bank account {bankAccount.Number} has {bankAccount.Balance} ");
+                bankAccount.CloseAccount();
             }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+           
+
+            //OOP allergies
+            Allergies allergies = new Allergies("Tom", 1034);
         }
     }
 }

@@ -6,16 +6,16 @@ namespace OOP_Homeworks
 {
     public class BankAccount
     {
-        private decimal balance;
-        private List<Transactions> allTransactions = new List<Transactions>();
-        private static int iBan = 1234567890;
         public string Number { get; }
         public string Owner { get; set; }
+        private static int accountNumber = 1234567890;
+        private List<Transactions> allTransactions = new List<Transactions>();
+
         public decimal Balance
         {
             get
             {
-                balance = 0;
+                decimal balance = 0;
                 foreach (var item in allTransactions)
                 {
                     balance += item.Amount;
@@ -24,31 +24,19 @@ namespace OOP_Homeworks
             }
             set
             {
-                if (value <= 0)
-                {
-                    throw new ArgumentException("Amount of balance need to be positive", "balance");
-                }
-                this.balance = value;
+                this.Balance = Balance;
             }
         }
 
-        public BankAccount(string owner, decimal initialBalance)
-        {
-            this.Owner = owner;
-            this.balance = initialBalance;
-            this.Number = iBan.ToString();
-            iBan++;
-        }
 
-        public void Withdrawals(decimal amount, DateTime date)
+        public BankAccount (string name, int initialBalance)
         {
-            if (amount <= 0)
-                throw new ArgumentException("Amount of withdrawals need to be positive", "amount");
-            if ((Balance - amount) < 0)
-                throw new InvalidOperationException("Not sufficient funds for this withdrawal");
-            var withdrawal = new Transactions(-amount, date);
-            allTransactions.Add(withdrawal);
+            MakeDeposit(initialBalance, DateTime.Now);
+            this.Owner = name;
+            this.Number = accountNumber.ToString();
+            accountNumber++;
         }
+        
 
         public void MakeDeposit(decimal amount, DateTime date)
         {
@@ -58,6 +46,29 @@ namespace OOP_Homeworks
             }
             var deposit = new Transactions(amount, date);
             allTransactions.Add(deposit);
+
+        }
+
+        public void MakeWithdrawal(decimal amount, DateTime date)
+        {
+            if (amount <= 0)
+                throw new ArgumentException("Amount of withdrawals needs to be positive", "amount");
+            if ((Balance - amount) < 0)
+                throw new InvalidOperationException("Not sufficient funds for this withdrawal");
+            var withdrawal = new Transactions(-amount, date);
+            allTransactions.Add(withdrawal);
+
+        }
+
+        public void CloseAccount()
+        {
+            if (Balance > 0)
+            {
+                Console.WriteLine($"The sum {Balance} was extracted in order to close the account");
+                MakeWithdrawal(Balance, DateTime.Now);
+
+            }
+            Console.WriteLine($"The bank account {this.Number} was closed");
         }
     }
 }
