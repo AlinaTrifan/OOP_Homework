@@ -29,6 +29,9 @@ namespace OOP_Homeworks
                 bankAccount.MakeDeposit(100, DateTime.Now);
                 Console.WriteLine($"After the deposit the bank account {bankAccount.Number} has {bankAccount.Balance} ");
                 bankAccount.CloseAccount();
+                bankAccount.MakeDeposit(100, DateTime.Now);
+                bankAccount.MakeWithdrawal(10, DateTime.Now);
+
             }
             catch (ArgumentException e)
             {
@@ -37,6 +40,10 @@ namespace OOP_Homeworks
             catch (InvalidOperationException ex)
             {
                 Console.WriteLine(ex.Message);
+            }
+            catch (NotSupportedException eg)
+            {
+                Console.WriteLine(eg.Message);
             }
            
 
