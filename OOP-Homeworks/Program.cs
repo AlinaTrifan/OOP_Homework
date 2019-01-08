@@ -31,7 +31,7 @@ namespace OOP_Homeworks
                 bankAccount.CloseAccount();
                 bankAccount.MakeDeposit(100, DateTime.Now);
                 bankAccount.MakeWithdrawal(10, DateTime.Now);
-
+                bankAccount.CloseAccount();
             }
             catch (ArgumentException e)
             {
